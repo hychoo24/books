@@ -1,4 +1,4 @@
-import 'package:books/models/books_model.dart';
+import 'package:books/models/book_model.dart';
 import 'package:books/models/category_model.dart';
 import 'package:books/providers/book_provider.dart';
 import 'package:books/providers/category_provider.dart';
@@ -17,7 +17,6 @@ class _BookFormState extends State<BookForm> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _titleController;
   late TextEditingController _authorController;
-  late TextEditingController _yearController;
   Category? _selectedCategory;
   late TextEditingController _publishedYearController;
   
@@ -29,16 +28,18 @@ void initState() {
 
   _titleController = TextEditingController();
   _authorController = TextEditingController();
-  _yearController = TextEditingController();
   _publishedYearController = TextEditingController();
 
   if (widget.book != null) {
     _titleController.text = widget.book!.title;
     _authorController.text = widget.book!.author;
-    _yearController.text = widget.book!.year.toString();
     _publishedYearController.text = widget.book!.publishedYear.toString();
     _selectedCategory = widget.book!.category;
   }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    Provider.of<CategoryProvider>(context, listen: false).fetchCategories();
+  });
 }
 
 
@@ -48,10 +49,11 @@ void initState() {
         id: widget.book?.id ?? 0,
         title: _titleController.text,
         author: _authorController.text,
-        year: 0,
-        publishedYear: int.parse(_yearController.text),
-        categoryId: 1,
-        category: null,
+        publishedYear: _publishedYearController.text.isEmpty
+            ? 0
+            : int.parse(_publishedYearController.text),
+        categoryId: _selectedCategory!.id,
+        category: _selectedCategory,
       );
 
     final provider = Provider.of<BookProvider>(context, listen: false);
@@ -61,68 +63,79 @@ void initState() {
       await provider.addBook(book);
     }
   
-    Provider.of<BookProvider>(context, listen: false).fetchBooks();
-    if (context.mounted) Navigator.pop(context, true);
-    final categoryProvider = Provider.of<CategoryProvider>(context);
-    final categories = categoryProvider.categories;
+    await Provider.of<BookProvider>(context, listen: false).fetchBooks();
+
+    if (mounted) {
+      Navigator.pop(context, true);
+    }
   }
 }
   
 
-  @override
-  Widget build(BuildContext context) {
-    final categoryProvider = Provider.of<CategoryProvider>(context);
-    final categories = categoryProvider.categories;
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Judul Buku'),
-                validator: (value) => value!.isEmpty ? 'Wajib diisi' : null,
+    @override
+    Widget build(BuildContext context) {
+      final categoryProvider = Provider.of<CategoryProvider>(context);
+      final categories = categoryProvider.categories;
+
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.book != null ? 'Edit Book' : 'Add Book'),
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Card(
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _titleController,
+                      decoration: const InputDecoration(labelText: 'Title'),
+                      validator: (value) => value!.isEmpty ? 'Wajib diisi' : null,
+                    ),
+                    TextFormField(
+                      controller: _authorController,
+                      decoration: const InputDecoration(labelText: 'Author'),
+                      validator: (value) => value!.isEmpty ? 'Required Field' : null,
+                    ),
+                    TextFormField(
+                      controller: _publishedYearController,
+                      decoration: const InputDecoration(labelText: 'Year'),
+                      keyboardType: TextInputType.number,
+                      validator: (value) => value!.isEmpty ? 'Required Field' : null,
+                    ),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<Category>(
+                      value: _selectedCategory,
+                      decoration: const InputDecoration(
+                        labelText: 'Category',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: categories.map((category) {
+                        return DropdownMenuItem<Category>(
+                          value: category,
+                          child: Text(category.name),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedCategory = value!;
+                        });
+                      },
+                      validator: (value) => value == null ? 'Choose Category' : null,
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: _submit,
+                      child: Text(widget.book != null ? 'Save Changes' : 'Add Book'),
+                  ),
+                ],
               ),
-              TextFormField(
-                controller: _authorController,
-                decoration: const InputDecoration(labelText: 'Penulis'),
-                validator: (value) => value!.isEmpty ? 'Wajib diisi' : null,
-              ),
-              TextFormField(
-                controller: _yearController,
-                decoration: const InputDecoration(labelText: 'Tahun'),
-                keyboardType: TextInputType.number,
-                validator: (value) => value!.isEmpty ? 'Wajib diisi' : null,
-              ),
-              DropdownButtonFormField<Category>(
-                value: _selectedCategory,
-                decoration: const InputDecoration(
-                  labelText: 'Kategori',
-                  border: OutlineInputBorder(),
-                ),
-                items: categories.map((category) {
-                  return DropdownMenuItem<Category>(
-                    value: category,
-                    child: Text(category.name),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedCategory = value!;
-                  });
-                },
-                validator: (value) => value == null ? 'Pilih kategori' : null,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: _submit,
-                child: Text(widget.book != null ? 'Simpan Perubahan' : 'Tambah Buku'),
-              )
-            ],
+            ),
           ),
         ),
       ),

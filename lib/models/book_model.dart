@@ -27,7 +27,6 @@ class Book {
   final int id;
   final String title;
   final String author;
-  final int year;
   final int categoryId;
   final Category? category;
   final int publishedYear;
@@ -36,7 +35,6 @@ class Book {
     required this.id,
     required this.title,
     required this.author,
-    required this.year,
     required this.categoryId,
     this.category,
     required this.publishedYear,
@@ -47,7 +45,7 @@ class Book {
       id: json['id'],
       title: json['title'],
       author: json['author'],
-      year: json['year'],
+
       categoryId: json['category_id'],
       category: json['Category'] != null
         ? Category.fromJson(json['Category'])
@@ -60,7 +58,6 @@ class Book {
         'id': id,
         'title': title,
         'author': author,
-        'year': year,
         'published_year': publishedYear,
         'category_id': categoryId,
       };

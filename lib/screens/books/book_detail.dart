@@ -1,4 +1,4 @@
-import 'package:books/models/books_model.dart';
+import 'package:books/models/book_model.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailPage extends StatelessWidget {
@@ -10,20 +10,22 @@ class BookDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detail Buku'),
+        title: Text('Detail Book'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Judul: ${book.title}', style: TextStyle(fontSize: 18)),
+            Text('ID: ${book.id}', style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 8),
+            Text('Judul: ${book.title}', style: const TextStyle(fontSize: 18)),
             SizedBox(height: 8),
-            Text('Penulis: ${book.author}'),
+            Text('Penulis: ${book.author}', style: const TextStyle(fontSize: 18)),
             SizedBox(height: 8),
-            Text('Tahun Terbit: ${book.publishedYear}'),
+            Text('Tahun Terbit: ${book.publishedYear}', style: const TextStyle(fontSize: 18)),
             SizedBox(height: 8),
-            Text('Kategori: ${book.category?.name ?? "-"}'),
+            Text('Kategori: ${book.category?.name ?? "-"}', style: const TextStyle(fontSize: 18)),
           ],
         ),
       ),

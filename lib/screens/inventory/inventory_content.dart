@@ -1,33 +1,33 @@
-import 'package:books/providers/book_provider.dart';
 import 'package:books/screens/category/category_content.dart';
-import 'package:books/screens/home/home_page.dart';
-import 'package:books/screens/inventory/inventory_content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'book_table.dart';
+import '../../providers/inventory_provider.dart';
+import 'inventory_table.dart';
+import '../books/book_content.dart';
+import '../home/home_page.dart';
 
-class BookContent extends StatefulWidget {
-  const BookContent({super.key});
+class InventoryContent extends StatefulWidget {
+  const InventoryContent({super.key});
 
   @override
-  State<BookContent> createState() => _BookContentState();
+  State<InventoryContent> createState() => _InventoryContentState();
 }
 
-class _BookContentState extends State<BookContent> {
+class _InventoryContentState extends State<InventoryContent> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<BookProvider>(context, listen: false).fetchBooks();
+      Provider.of<InventoryProvider>(context, listen: false).fetchInventories();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Book"),
-      ),
+      appBar: AppBar(title: const Text("Inventory")),
+      
+      // ⬇️ Drawer ditambahkan di sini
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -40,45 +40,37 @@ class _BookContentState extends State<BookContent> {
               leading: const Icon(Icons.home),
               title: const Text('Home'),
               onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const HomePage()),
-                );
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()));
               },
             ),
             ListTile(
               leading: const Icon(Icons.book),
               title: const Text('Book'),
               onTap: () {
-                Navigator.pop(context); // Tetap di halaman ini
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const BookContent()));
               },
             ),
             ListTile(
               leading: const Icon(Icons.inventory),
               title: const Text('Inventory'),
               onTap: () {
-                 Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const InventoryContent()),
-                );
+                Navigator.pop(context); // sudah di Inventory
               },
             ),
             ListTile(
               leading: const Icon(Icons.category),
               title: const Text('Category'),
               onTap: () {
-                Navigator.pushReplacement(
-                  context, 
-                  MaterialPageRoute(builder: (_) => const CategoryContent()),
-                );
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const CategoryContent()));
               },
             ),
           ],
         ),
       ),
+
       body: const Padding(
         padding: EdgeInsets.all(16),
-        child: BookTable(),
+        child: InventoryTable(),
       ),
     );
   }

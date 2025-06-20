@@ -1,5 +1,5 @@
 import 'package:books/api/dio_client.dart';
-import 'package:books/models/books_model.dart';
+import 'package:books/models/book_model.dart';
 
 
 class BookService {
