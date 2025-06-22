@@ -1,7 +1,6 @@
 import 'package:books/api/dio_client.dart';
 import 'package:books/models/book_model.dart';
 
-
 class BookService {
   static const String groupApi = '/books';
   
