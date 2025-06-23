@@ -28,8 +28,7 @@ class _InventoryFormState extends State<InventoryForm> {
       _quantityController.text = inv.quantity.toString();
       _selectedCategoryId = inv.categoryId;
     }
-
-    // Ambil daftar kategori jika belum
+    
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<CategoryProvider>(context, listen: false).fetchCategories();
     });

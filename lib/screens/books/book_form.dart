@@ -113,8 +113,11 @@ void initState() {
                       value: _selectedCategory,
                       decoration: const InputDecoration(
                         labelText: 'Category',
-                        border: OutlineInputBorder(),
+                        border: UnderlineInputBorder(),
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 10),
                       ),
+                      isExpanded: true,
                       items: categories.map((category) {
                         return DropdownMenuItem<Category>(
                           value: category,

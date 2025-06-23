@@ -28,10 +28,8 @@ class _BookTableState extends State<BookTable> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 🔍 Search dan Tambah
             Row(
               children: [
-                // Search Bar
                 Expanded(
                   child: TextField(
                     controller: _searchController,
@@ -57,8 +55,6 @@ class _BookTableState extends State<BookTable> {
               ],
             ),
             const SizedBox(height: 16),
-
-            // 📋 Table
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,

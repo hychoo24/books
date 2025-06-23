@@ -26,8 +26,6 @@ class _InventoryContentState extends State<InventoryContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Inventory")),
-      
-      // ⬇️ Drawer ditambahkan di sini
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -54,7 +52,7 @@ class _InventoryContentState extends State<InventoryContent> {
               leading: const Icon(Icons.inventory),
               title: const Text('Inventory'),
               onTap: () {
-                Navigator.pop(context); // sudah di Inventory
+                Navigator.pop(context);
               },
             ),
             ListTile(

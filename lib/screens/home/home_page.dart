@@ -6,9 +6,6 @@ import '../books/book_content.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +22,7 @@ class HomePage extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('Home'),
               onTap: () {
-                Navigator.pop(context); // sudah di Home
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -81,7 +78,7 @@ class HomePage extends StatelessWidget {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   double maxWidth = constraints.maxWidth;
-                  int itemPerRow = (maxWidth / 250).floor(); // 250 adalah max lebar 1 kartu
+                  int itemPerRow = (maxWidth / 250).floor();
                   double cardWidth = (maxWidth - ((itemPerRow - 1) * 16)) / itemPerRow;
 
                   return Wrap(
@@ -131,7 +128,7 @@ class HomePage extends StatelessWidget {
       required String title,
       required Color color,
       required VoidCallback onTap,
-      double width = 250, // Default width per card
+      double width = 250,
     }) {
       return SizedBox(
         width: width,

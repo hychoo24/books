@@ -27,7 +27,6 @@ class _InventoryTableState extends State<InventoryTable> {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          // 🔍 Search dan Tambah
           LayoutBuilder(
             builder: (context, constraints) {
               return Row(
@@ -67,7 +66,7 @@ class _InventoryTableState extends State<InventoryTable> {
               child: Align(
                 alignment: Alignment.topLeft,
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.95, // Gunakan 95% lebar layar
+                  width: MediaQuery.of(context).size.width * 0.95,
                   child: DataTable(
                     columnSpacing: 32,
                     columns: const [

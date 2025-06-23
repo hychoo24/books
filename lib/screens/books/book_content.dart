@@ -50,7 +50,7 @@ class _BookContentState extends State<BookContent> {
               leading: const Icon(Icons.book),
               title: const Text('Book'),
               onTap: () {
-                Navigator.pop(context); // Tetap di halaman ini
+                Navigator.pop(context);
               },
             ),
             ListTile(
