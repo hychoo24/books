@@ -84,7 +84,7 @@ void initState() {
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Card(
-            elevation: 2,
+            elevation: 0,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -135,6 +135,14 @@ void initState() {
                     ElevatedButton(
                       onPressed: _submit,
                       child: Text(widget.book != null ? 'Save Changes' : 'Add Book'),
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: Colors.deepPurple, // Warna ungu
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6), // kurangin dari default (20)
+                      ),
+                    ),
                   ),
                 ],
               ),

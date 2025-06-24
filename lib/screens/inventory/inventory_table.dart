@@ -32,6 +32,8 @@ class _InventoryTableState extends State<InventoryTable> {
               return Row(
                 children: [
                   Expanded(
+                    child: SizedBox(
+                      height: 40,
                     child: TextField(
                       controller: _searchController,
                       decoration: const InputDecoration(
@@ -42,10 +44,20 @@ class _InventoryTableState extends State<InventoryTable> {
                       onChanged: (_) => setState(() {}),
                     ),
                   ),
+                ),
                   const SizedBox(width: 12),
                   ElevatedButton.icon(
                     icon: const Icon(Icons.add),
                     label: const Text('Add Inventory'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple, // Warna ungu
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      minimumSize: const Size(150, 37), // Lebar & tinggi minimum tombol
+                    ),
                     onPressed: () {
                       Navigator.push(
                         context,

@@ -31,9 +31,11 @@ class _BookTableState extends State<BookTable> {
             Row(
               children: [
                 Expanded(
+                  child: SizedBox(
+                    height: 37,
                   child: TextField(
                     controller: _searchController,
-                    decoration: const InputDecoration(
+                    decoration: const InputDecoration(  
                       labelText: 'Search Books',
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(),
@@ -41,11 +43,23 @@ class _BookTableState extends State<BookTable> {
                     onChanged: (_) => setState(() {}),
                   ),
                 ),
+              ),
                 const SizedBox(width: 12),
                 ElevatedButton.icon(
                   icon: const Icon(Icons.add),
                   label: const Text('Add Book'),
-                  onPressed: () {
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple, // Warna ungu
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6), // kurangin dari default (20)
+                    ),
+                  ),
+                  //     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  //     minimumSize: const Size(150, 55), // Lebar & tinggi minimum tombol
+                  //   ),
+                  
+                onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => const BookForm()),
@@ -106,6 +120,7 @@ class _BookTableState extends State<BookTable> {
                             IconButton(
                               icon: const Icon(Icons.delete),
                               tooltip: 'Delete',
+                              color: Colors.red,
                               onPressed: () {
                                 bookProvider.deleteBook(book.id);
                               },

@@ -1,5 +1,7 @@
 import 'package:books/providers/inventory_provider.dart';
+import 'package:books/providers/stat_provider.dart';
 import 'package:books/screens/home/home_page.dart';
+// import 'package:books/screens/stats/stat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:books/providers/book_provider.dart';
@@ -21,13 +23,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => BookProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => InventoryProvider()),
+        ChangeNotifierProvider(create: (_) => StatProvider()),
+
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const HomePage(),
+        home: HomePage(),
+        // home: StatPage(),
       ),
     );
   }

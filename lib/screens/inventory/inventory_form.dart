@@ -28,7 +28,7 @@ class _InventoryFormState extends State<InventoryForm> {
       _quantityController.text = inv.quantity.toString();
       _selectedCategoryId = inv.categoryId;
     }
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<CategoryProvider>(context, listen: false).fetchCategories();
     });
@@ -107,11 +107,24 @@ class _InventoryFormState extends State<InventoryForm> {
                 validator: (value) =>
                     value == null ? 'Choose only one category' : null,
               ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _saveForm,
-                child: Text(widget.inventory == null ? 'Add Inventory' : 'Save Changes'),
-              )
+              const SizedBox(height: 20),
+              Align(
+                alignment: Alignment.center,
+                child:SizedBox(
+                  width: 200,
+                    child: ElevatedButton(
+                    onPressed: _saveForm,
+                    child: Text(widget.inventory == null ? 'Add Inventory' : 'Save Changes'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple, // Warna ungu
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6), // kurangin dari default (20)
+                      ),
+                    ),
+                  )
+                )
+              ),
             ],
           ),
         ),

@@ -6,6 +6,7 @@ class Inventory {
   final int quantity;
   final int categoryId;
   final Category? category;
+  
 
   Inventory({
     required this.id,

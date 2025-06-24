@@ -33,6 +33,8 @@ class _CategoryTableState extends State<CategoryTable> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
+                child: SizedBox(
+                  height: 40,
                 child: TextField(
                   controller: _searchController,
                   decoration: const InputDecoration(
@@ -43,10 +45,21 @@ class _CategoryTableState extends State<CategoryTable> {
                   onChanged: (_) => setState(() {}),
                 ),
               ),
+            ),
               const SizedBox(width: 12),
               ElevatedButton.icon(
                 icon: const Icon(Icons.add),
                 label: const Text('Add Category'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  minimumSize: const Size(150, 37),
+                ),
+              
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -59,7 +72,6 @@ class _CategoryTableState extends State<CategoryTable> {
         },
       ),
         const SizedBox(height: 16),
-
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

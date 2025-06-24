@@ -71,6 +71,13 @@ class _CategoryFormState extends State<CategoryForm> {
               ElevatedButton(
                 onPressed: _submit,
                 child: Text(widget.category != null ? 'Save Changes' : 'Add Category'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple, // Warna ungu
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6), // kurangin dari default (20)
+                  ),
+                ),
               )
             ],
           ),
