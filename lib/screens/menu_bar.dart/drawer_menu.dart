@@ -1,3 +1,4 @@
+import 'package:books/screens/auth/login_page.dart';
 import 'package:books/screens/books/book_content.dart';
 import 'package:books/screens/category/category_content.dart';
 import 'package:books/screens/home/home_page.dart';
@@ -49,6 +50,14 @@ class AppDrawer extends StatelessWidget {
             text: 'Category',
             destination: const CategoryContent(),
             routeName: '/category',
+          ),
+          Divider(),
+           _buildDrawerItem(
+            context,
+            icon: Icons.exit_to_app,
+            text: 'Log Out',
+            destination: const LoginPage(),
+            routeName: '/auth/logout',
           ),
         ],
       ),
