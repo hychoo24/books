@@ -64,7 +64,12 @@ class _InventoryFormState extends State<InventoryForm> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.inventory == null ? 'Add Inventory' : 'Edit Inventory'),
+        title: Text(
+          widget.inventory == null ? 'Add Inventory' : 'Edit Inventory',
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.deepPurple,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -114,7 +119,6 @@ class _InventoryFormState extends State<InventoryForm> {
                   width: 200,
                     child: ElevatedButton(
                     onPressed: _saveForm,
-                    child: Text(widget.inventory == null ? 'Add Inventory' : 'Save Changes'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple, // Warna ungu
                         foregroundColor: Colors.white,
@@ -122,6 +126,7 @@ class _InventoryFormState extends State<InventoryForm> {
                           borderRadius: BorderRadius.circular(6), // kurangin dari default (20)
                       ),
                     ),
+                    child: Text(widget.inventory == null ? 'Add Inventory' : 'Save Changes'),
                   )
                 )
               ),

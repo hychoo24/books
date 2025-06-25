@@ -120,6 +120,7 @@ class _CategoryTableState extends State<CategoryTable> {
                           IconButton(
                             icon: const Icon(Icons.delete),
                             tooltip: 'Delete',
+                            color: Colors.red,
                             onPressed: () {
                               categoryProvider.deleteCategory(category.id);
                             },

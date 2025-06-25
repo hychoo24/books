@@ -49,7 +49,14 @@ class _CategoryFormState extends State<CategoryForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.category != null ? 'Edit Category' : 'Add Category')),
+      appBar: AppBar(
+        title: Text(
+          widget.category == null ? 'Add Category' : 'Edit Category',
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.deepPurple,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -70,7 +77,6 @@ class _CategoryFormState extends State<CategoryForm> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submit,
-                child: Text(widget.category != null ? 'Save Changes' : 'Add Category'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple, // Warna ungu
                   foregroundColor: Colors.white,
@@ -78,6 +84,7 @@ class _CategoryFormState extends State<CategoryForm> {
                     borderRadius: BorderRadius.circular(6), // kurangin dari default (20)
                   ),
                 ),
+                child: Text(widget.category != null ? 'Save Changes' : 'Add Category'),
               )
             ],
           ),

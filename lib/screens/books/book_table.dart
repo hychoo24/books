@@ -1,7 +1,7 @@
+import 'package:books/screens/books/book_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/book_provider.dart';
-import 'book_detail.dart';
 import 'book_form.dart';
 
 class BookTable extends StatefulWidget {

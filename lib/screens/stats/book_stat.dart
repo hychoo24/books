@@ -88,11 +88,8 @@ class BookStat extends StatelessWidget {
                       child: Text(
                       value.toInt().toString(),
                       style: const TextStyle(fontSize: 14),
-                    // interval: 1,
                       ),
                     ),
-              // gridData: FlGridData(show: true),
-              // borderData: FlBorderData(show: true),
                   ),
                 ),
               ),

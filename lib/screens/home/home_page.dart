@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                       _buildMenuCard(
                         context,
                         title: 'Inventory',
-                        color: Colors.blue,
+                        color: Colors.orange,
                         subtitle: 'Total Inventory: $totalInventories',
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (_) => const InventoryContent()));
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                       _buildMenuCard(
                         context,
                         title: 'Category',
-                        color: Colors.orange,
+                        color: const Color.fromARGB(255, 0, 132, 255),
                         subtitle: 'Total Categories: $totalCategories',
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (_) => const CategoryContent()));
@@ -157,6 +157,8 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 16),
             const BookStat(),
+            
+            const SizedBox(height: 26),
             const InventoryStat(),
           ],
         ),

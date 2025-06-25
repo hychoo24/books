@@ -123,6 +123,7 @@ class _InventoryTableState extends State<InventoryTable> {
                             IconButton(
                               icon: const Icon(Icons.delete),
                               tooltip: 'Delete',
+                              color: Colors.red,
                               onPressed: () {
                                 provider.deleteInventory(item.id);
                               },

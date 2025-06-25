@@ -9,22 +9,85 @@ class InventoryDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Detail Inventory')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text(
+          "Detail Inventory",
+          style: const TextStyle(color: Colors.white),
+          ),
+        centerTitle: false,
+        backgroundColor: Colors.deepPurple,
+        
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('ID: ${inventory.id}', style: const TextStyle(fontSize: 18)),
-            const SizedBox(height: 8),
-            Text('Name: ${inventory.name}', style: const TextStyle(fontSize: 18)),
-            const SizedBox(height: 8),
-            Text('Total: ${inventory.quantity}', style: const TextStyle(fontSize: 18)),
-            const SizedBox(height: 8),
-            Text('Category: ${inventory.category?.name ?? "-"}', style: const TextStyle(fontSize: 18)),
-          ],
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          elevation: 6,
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DetailItem(icon: Icons.assignment_ind, label: "ID", value: inventory.id.toString()),
+                DetailItem(icon: Icons.badge, label: "Name", value: inventory.name),
+                DetailItem(icon: Icons.production_quantity_limits, label: "Quantity", value: inventory.quantity.toString()),
+                DetailItem(icon: Icons.category, label: "Kategori", value: inventory.category?.name ?? "-"),
+              ],
+            ),
+          ),
         ),
+      ),
+      backgroundColor: const Color(0xFFF3F0FF),
+    );
+  }
+}
+
+class DetailItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const DetailItem({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: Colors.deepPurple),
+          const SizedBox(width: 12),
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                style: const TextStyle(color: Colors.black87, fontSize: 16),
+                children: [
+                  TextSpan(
+                    text: "$label: ",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(text: value),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+

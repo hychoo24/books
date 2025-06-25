@@ -78,9 +78,14 @@ void initState() {
       final categories = categoryProvider.categories;
 
       return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.book != null ? 'Edit Book' : 'Add Book'),
+      appBar: AppBar(
+        title: Text(
+          widget.book == null ? 'Add Book' : 'Edit Book',
+          style: const TextStyle(color: Colors.white),
         ),
+        backgroundColor: Colors.deepPurple,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Card(
@@ -134,7 +139,6 @@ void initState() {
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: _submit,
-                      child: Text(widget.book != null ? 'Save Changes' : 'Add Book'),
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
                         backgroundColor: Colors.deepPurple, // Warna ungu
@@ -143,6 +147,7 @@ void initState() {
                           borderRadius: BorderRadius.circular(6), // kurangin dari default (20)
                       ),
                     ),
+                      child: Text(widget.book != null ? 'Save Changes' : 'Add Book'),
                   ),
                 ],
               ),
