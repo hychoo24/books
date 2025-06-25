@@ -35,7 +35,7 @@ class BookStat extends StatelessWidget {
                     return FlSpot(e.key.toDouble(), e.value.total.toDouble());
                   }).toList(),
                   isCurved: true,
-                  color: Colors.deepPurple,
+                  color: Colors.teal,
                   barWidth: 3,
                   dotData: FlDotData(show: true),
                 ),

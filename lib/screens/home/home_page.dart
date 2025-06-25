@@ -4,6 +4,7 @@ import 'package:books/providers/inventory_provider.dart';
 import 'package:books/providers/stat_provider.dart';
 import 'package:books/screens/category/category_content.dart';
 import 'package:books/screens/inventory/inventory_content.dart';
+import 'package:books/screens/menu_bar.dart/drawer_menu.dart';
 import 'package:books/screens/stats/book_stat.dart';
 import 'package:books/screens/stats/inventory_stat.dart';
 import 'package:flutter/material.dart';
@@ -41,55 +42,15 @@ class _HomePageState extends State<HomePage> {
     final totalCategories = categoryProvider.categories.length;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.deepPurple),
-              child: Text('Menu', style: TextStyle(color: Colors.white, fontSize: 24)),
-            ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.book),
-              title: const Text('Book'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const BookContent()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.inventory),
-              title: const Text('Inventory'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const InventoryContent()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.category),
-              title: const Text('Category'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const CategoryContent()),
-                );
-              },
-            ),
-          ],
+      appBar: AppBar(
+        title: Text('Home',
+          style: const TextStyle(color: Colors.white),
         ),
+        backgroundColor: Colors.deepPurple,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+
+      drawer: const AppDrawer(currentRoute: '/home'),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
